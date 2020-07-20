@@ -1,0 +1,21 @@
+spring:
+  application:
+    name: api-gateway
+  datasource:
+    url: jdbc:mysql://localhost:3306/resto?serverTimeZone=UTC
+    username: resto
+    password: resto
+server:
+  port: 8710
+management:
+  endpoints:
+    routes:
+      enabled: true
+eureka:
+  client:
+    fetchRegistry: true
+    service-url:
+      defaultZone: http://localhost:8720/eureka
+app:
+  secret: abcd-efgh-ijkl-mnop
+  jwtExpirationMs: 5000000000
