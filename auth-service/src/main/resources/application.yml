@@ -1,0 +1,16 @@
+server:
+  port: 8740
+spring:
+  application:
+    name: auth-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/resto?allowPublicKeyRetrieval=true&useSSL=false&serverTimeZone=UTC
+    username: resto
+    password: resto
+app:
+  secret: abcd-efgh-ijkl-mnop
+  jwtExpirationMs: 5000000000
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8720/eureka
