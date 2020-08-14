@@ -11,12 +11,14 @@ import com.resto.appService.dao.CategoryDAO;
 import com.resto.appService.dao.ItemDAO;
 import com.resto.appService.dao.PersonDAO;
 import com.resto.appService.dao.TableDAO;
+import com.resto.appService.dao.TaxDAO;
 import com.resto.appService.service.AppService;
 import com.resto.commonModel.entity.Category;
 import com.resto.commonModel.entity.CategoryType;
 import com.resto.commonModel.entity.Item;
 import com.resto.commonModel.entity.Person;
 import com.resto.commonModel.entity.Tables;
+import com.resto.commonModel.entity.Tax;
 
 @Service
 public class AppServiceImpl implements AppService {
@@ -32,6 +34,9 @@ public class AppServiceImpl implements AppService {
 	
 	@Autowired
 	private PersonDAO personDAO;
+	
+	@Autowired
+	private TaxDAO taxDAO;
 
 	@Override
 	@Transactional
@@ -119,9 +124,8 @@ public class AppServiceImpl implements AppService {
 
 	@Override
 	@Transactional
-	public List<Person> getPersons() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<Person> getPersons(int page,int size, String status) {
+		return personDAO.getPersons(page,size,status);
 	}
 
 	@Override
@@ -132,9 +136,38 @@ public class AppServiceImpl implements AppService {
 
 	@Override
 	@Transactional
-	public Person deactivatePerson(Person person) {
-		// TODO Auto-generated method stub
-		return null;
+	public void deactivatePerson(Long personId) {
+		personDAO.deactivatePerson(personId);
+	}
+
+	@Override
+	@Transactional
+	public Person updatePerson(Person person) {
+		return personDAO.updatePerson(person);
+	}
+
+	@Override
+	@Transactional
+	public void activatePerson(Long personId) {
+		personDAO.activatePerson(personId);
+	}
+
+	@Override
+	@Transactional
+	public Tax saveTax(Tax tax) {
+		return taxDAO.saveTax(tax);
+	}
+
+	@Override
+	@Transactional
+	public List<Tax> getAllTaxes() {
+		return taxDAO.getAllTaxes();
+	}
+
+	@Override
+	@Transactional
+	public void deleteTax(Long taxId) {
+		taxDAO.deleteTax(taxId);
 	}
 
 }

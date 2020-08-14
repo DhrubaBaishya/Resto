@@ -15,6 +15,9 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.CreationTimestamp;
 import org.hibernate.annotations.UpdateTimestamp;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+
 @Entity
 @Table(name = "person_details")
 public class Person {
@@ -24,10 +27,12 @@ public class Person {
 	@Column(name = "person_id")
 	private Long personId;
 
+	@JsonManagedReference
 	@OneToOne
 	@JoinColumn(name = "user_id")
 	private User user;
 
+	@JsonIgnore
 	@Transient
 	private boolean enabled;
 

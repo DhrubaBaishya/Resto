@@ -6,6 +6,7 @@ import java.util.stream.Collectors;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.DisabledException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -55,6 +56,9 @@ public class AuthController {
 					.collect(Collectors.toList());
 
 			return ResponseEntity.ok(new JWTResponse(jwt, userDetails.getId(), null, userDetails.getUsername(), roles));
+		} catch (DisabledException e) {
+			System.out.println(e);
+			throw new IncorrectAuthorizationException("User has been deactivated. Contact Administrator");
 		} catch (Exception e) {
 			System.out.println(e);
 			throw new IncorrectAuthorizationException("The provided credentials are incorrect");
