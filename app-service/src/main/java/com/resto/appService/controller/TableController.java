@@ -28,10 +28,10 @@ public class TableController {
 		return new Response<Tables>("tables", tables);
 	}
 	
-	@GetMapping("/table/{id}")
-	public Response<Tables> getTable(@PathVariable int id){
+	@GetMapping("/table/{tableId}")
+	public Response<Tables> getTable(@PathVariable Long tableId){
 		List<Tables> tables = new ArrayList<Tables>();
-		tables.add(service.getTable(id));
+		tables.add(service.getTable(tableId));
 		return new Response<Tables>("tables", tables);
 	}
 	
@@ -42,18 +42,18 @@ public class TableController {
 		return new Response<Tables>("tables", tables);
 	}
 	
-	@PostMapping("/table/{id}")
-	public void deleteTable(@PathVariable int id) {
-		service.deleteTable(id);
+	@PostMapping("/table/{tableId}")
+	public void deleteTable(@PathVariable Long tableId) {
+		service.deleteTable(tableId);
 	}
 	
-	@PostMapping("/table/increase/{id}")
-	public void increaseCapacity(@PathVariable int id) {
-		service.increaseCapacity(id);
+	@PostMapping("/table/increase/{tableId}")
+	public void increaseCapacity(@PathVariable Long tableId) {
+		service.increaseCapacity(tableId);
 	}
 	
-	@PostMapping("/table/decrease/{id}")
-	public void decreaseCapacity(@PathVariable int id) {
-		service.decreaseCapacity(id);
+	@PostMapping("/table/decrease/{tableId}")
+	public void decreaseCapacity(@PathVariable Long tableId) {
+		service.decreaseCapacity(tableId);
 	}
 }

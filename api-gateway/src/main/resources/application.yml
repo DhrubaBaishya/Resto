@@ -19,3 +19,18 @@ eureka:
 app:
   secret: abcd-efgh-ijkl-mnop
   jwtExpirationMs: 5000000000
+zuul:
+  ribbon:
+    eager-load:
+      enabled: true
+hystrix:
+  command:
+    default:
+      execution:
+        isolation:
+          thread:
+            timeoutInMilliseconds: 1000000
+          strategy: THREAD
+ribbon:
+  ReadTimeout: 60000
+          

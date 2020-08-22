@@ -7,18 +7,23 @@ import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.resto.appService.dao.AreaDAO;
 import com.resto.appService.dao.CategoryDAO;
 import com.resto.appService.dao.ItemDAO;
+import com.resto.appService.dao.OrderDAO;
 import com.resto.appService.dao.PersonDAO;
 import com.resto.appService.dao.TableDAO;
 import com.resto.appService.dao.TaxDAO;
 import com.resto.appService.service.AppService;
+import com.resto.commonModel.entity.Area;
 import com.resto.commonModel.entity.Category;
 import com.resto.commonModel.entity.CategoryType;
 import com.resto.commonModel.entity.Item;
+import com.resto.commonModel.entity.Order;
 import com.resto.commonModel.entity.Person;
 import com.resto.commonModel.entity.Tables;
 import com.resto.commonModel.entity.Tax;
+import com.resto.commonModel.queryUtil.SearchCriteria;
 
 @Service
 public class AppServiceImpl implements AppService {
@@ -37,6 +42,12 @@ public class AppServiceImpl implements AppService {
 	
 	@Autowired
 	private TaxDAO taxDAO;
+	
+	@Autowired
+	private OrderDAO orderDAO;
+	
+	@Autowired
+	private AreaDAO areaDAO;
 
 	@Override
 	@Transactional
@@ -46,8 +57,8 @@ public class AppServiceImpl implements AppService {
 
 	@Override
 	@Transactional
-	public Tables getTable(int id) {
-		return tableDAO.getTable(id);
+	public Tables getTable(Long tableId) {
+		return tableDAO.getTable(tableId);
 	}
 
 	@Override
@@ -58,20 +69,20 @@ public class AppServiceImpl implements AppService {
 
 	@Override
 	@Transactional
-	public void deleteTable(int id) {
-		tableDAO.deleteTable(id);
+	public void deleteTable(Long tableId) {
+		tableDAO.deleteTable(tableId);
 	}
 
 	@Override
 	@Transactional
-	public void increaseCapacity(int id) {
-		tableDAO.increaseCapacity(id);
+	public void increaseCapacity(Long tableId) {
+		tableDAO.increaseCapacity(tableId);
 	}
 
 	@Override
 	@Transactional
-	public void decreaseCapacity(int id) {
-		tableDAO.decreaseCapacity(id);
+	public void decreaseCapacity(Long tableId) {
+		tableDAO.decreaseCapacity(tableId);
 	}
 
 	@Override
@@ -168,6 +179,48 @@ public class AppServiceImpl implements AppService {
 	@Transactional
 	public void deleteTax(Long taxId) {
 		taxDAO.deleteTax(taxId);
+	}
+
+	@Override
+	@Transactional
+	public List<Order> getAllOrders(int page, int size) {
+		return orderDAO.getAllOrders(page,size);
+	}
+
+	@Override
+	@Transactional
+	public Order getOrder(Long tableId) {
+		return orderDAO.getOrder(tableId);
+	}
+
+	@Override
+	@Transactional
+	public Order saveOrder(Order order) {
+		return orderDAO.saveOrder(order);
+	}
+
+	@Override
+	@Transactional
+	public List<Order> searchOrder(List<SearchCriteria> params, int page, int size) {
+		return orderDAO.searchOrder(params, page, size);
+	}
+
+	@Override
+	@Transactional
+	public List<Area> getAllArea() {
+		return areaDAO.getAllArea();
+	}
+
+	@Override
+	@Transactional
+	public Area saveArea(Area area) {
+		return areaDAO.saveArea(area);
+	}
+
+	@Override
+	@Transactional
+	public void deleteArea(Long areaId) {
+		areaDAO.deleteArea(areaId);
 	}
 
 }

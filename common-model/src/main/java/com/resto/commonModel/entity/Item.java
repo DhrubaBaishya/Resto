@@ -43,6 +43,9 @@ public class Item {
 	@Transient
 	private int categoryTypeId;
 
+	@Transient
+	private String categoryTypeName;
+
 	@CreationTimestamp
 	@Column(name = "creation_date", updatable = false)
 	private Timestamp creationDate;
@@ -103,6 +106,14 @@ public class Item {
 
 	public void setCategoryTypeId(int categoryTypeId) {
 		this.categoryTypeId = categoryTypeId;
+	}
+
+	public String getCategoryTypeName() {
+		return category.getCategoryTypeName();
+	}
+
+	public void setCategoryTypeName(String categoryTypeName) {
+		this.categoryTypeName = categoryTypeName;
 	}
 
 	public Timestamp getCreationDate() {

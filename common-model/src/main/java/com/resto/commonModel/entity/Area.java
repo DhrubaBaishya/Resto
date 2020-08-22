@@ -1,6 +1,7 @@
 package com.resto.commonModel.entity;
 
 import java.sql.Timestamp;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -18,27 +19,21 @@ import org.hibernate.annotations.UpdateTimestamp;
 import org.hibernate.annotations.Where;
 
 @Entity
-@Table(name = "table_details")
-public class Tables {
+@Table(name = "area_details")
+public class Area {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "table_id")
-	private Long tableId;
-
 	@Column(name = "area_id")
-	private int areaId;
+	private Long areaId;
 
-	@Column(name = "table_name")
-	private String tableName;
-
-	@Column(name = "capacity")
-	private int capacity;
+	@Column(name = "area_name")
+	private String areaName;
 
 	@OneToMany(fetch = FetchType.LAZY)
-	@JoinColumn(name = "table_id")
-	@Where(clause = "status = 'NEW'")
-	private List<Order> orders;
+	@JoinColumn(name = "area_id")
+	@Where(clause = "enabled = 1")
+	private List<Tables> tables = new ArrayList<Tables>();
 
 	@CreationTimestamp
 	@Column(name = "creation_date", updatable = false)
@@ -48,51 +43,31 @@ public class Tables {
 	@Column(name = "last_update_date")
 	private Timestamp lastUpdateDate;
 
-	@Column(name = "enabled")
-	private boolean enabled;
-
-	public Tables() {
-		super();
+	public Area() {
 	}
 
-	public Long getTableId() {
-		return tableId;
-	}
-
-	public void setTableId(Long tableId) {
-		this.tableId = tableId;
-	}
-
-	public int getAreaId() {
+	public Long getAreaId() {
 		return areaId;
 	}
 
-	public void setAreaId(int areaId) {
+	public void setAreaId(Long areaId) {
 		this.areaId = areaId;
 	}
 
-	public String getTableName() {
-		return tableName;
+	public String getAreaName() {
+		return areaName;
 	}
 
-	public void setTableName(String tableName) {
-		this.tableName = tableName;
+	public void setAreaName(String areaName) {
+		this.areaName = areaName;
 	}
 
-	public int getCapacity() {
-		return capacity;
+	public List<Tables> getTables() {
+		return tables;
 	}
 
-	public List<Order> getOrders() {
-		return orders;
-	}
-
-	public void setOrders(List<Order> orders) {
-		this.orders = orders;
-	}
-
-	public void setCapacity(int capacity) {
-		this.capacity = capacity;
+	public void setTables(List<Tables> tables) {
+		this.tables = tables;
 	}
 
 	public Timestamp getCreationDate() {
@@ -111,11 +86,4 @@ public class Tables {
 		this.lastUpdateDate = lastUpdateDate;
 	}
 
-	public boolean isEnabled() {
-		return enabled;
-	}
-
-	public void setEnabled(boolean enabled) {
-		this.enabled = enabled;
-	}
 }

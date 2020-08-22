@@ -26,9 +26,9 @@ public class TableDAOImpl implements TableDAO {
 	}
 
 	@Override
-	public Tables getTable(int id) {
+	public Tables getTable(Long tableId) {
 		Session session = entityManager.unwrap(Session.class);
-		return session.get(Tables.class, id);
+		return session.get(Tables.class, tableId);
 	}
 
 	@Override
@@ -40,25 +40,25 @@ public class TableDAOImpl implements TableDAO {
 	}
 
 	@Override
-	public void deleteTable(int id) {
+	public void deleteTable(Long tableId) {
 		Session session = entityManager.unwrap(Session.class);
-		Tables table = session.get(Tables.class, id);
+		Tables table = session.get(Tables.class, tableId);
 		table.setEnabled(false);
 		session.saveOrUpdate(table);
 	}
 
 	@Override
-	public void increaseCapacity(int id) {
+	public void increaseCapacity(Long tableId) {
 		Session session = entityManager.unwrap(Session.class);
-		Tables table = session.get(Tables.class, id);
+		Tables table = session.get(Tables.class, tableId);
 		table.setCapacity(table.getCapacity() + 1);
 		session.saveOrUpdate(table);
 	}
 
 	@Override
-	public void decreaseCapacity(int id) {
+	public void decreaseCapacity(Long tableId) {
 		Session session = entityManager.unwrap(Session.class);
-		Tables table = session.get(Tables.class, id);
+		Tables table = session.get(Tables.class, tableId);
 		if(table.getCapacity() > 0) {
 			table.setCapacity(table.getCapacity() - 1);
 		}
