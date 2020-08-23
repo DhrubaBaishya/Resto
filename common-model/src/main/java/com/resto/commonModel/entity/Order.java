@@ -33,6 +33,9 @@ public class Order {
 	@Column(name = "table_id")
 	private Long tableId;
 
+	@Column(name = "table_name")
+	private String tableName;
+
 	@Column(name = "status")
 	private String status;
 
@@ -74,6 +77,14 @@ public class Order {
 
 	public void setTableId(Long tableId) {
 		this.tableId = tableId;
+	}
+
+	public String getTableName() {
+		return tableName;
+	}
+
+	public void setTableName(String tableName) {
+		this.tableName = tableName;
 	}
 
 	public String getStatus() {

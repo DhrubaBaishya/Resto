@@ -65,8 +65,17 @@ public class OrderController {
 	}
 	
 	@PostMapping("/order/complete")
-	public Response<Order> completeStatus(@RequestBody Order order){
+	public Response<Order> completeOrder(@RequestBody Order order){
 		order.setStatus("COMPLETE");
+		service.saveOrder(order);
+		List<Order> orders = new ArrayList<Order>();
+		orders.add(order);
+		return new Response<Order>("Order", orders);
+	}
+	
+	@PostMapping("/order/cancel")
+	public Response<Order> cancelOrder(@RequestBody Order order){
+		order.setStatus("CANCELLED");
 		service.saveOrder(order);
 		List<Order> orders = new ArrayList<Order>();
 		orders.add(order);
